@@ -6,15 +6,13 @@ import { PriceResult } from '@/types';
 export default async function ResultsPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | undefined };
+  searchParams: URLSearchParams;
 }) {
-  // Convert searchParams to URLSearchParams to resolve type compatibility
-  const params = new URLSearchParams(Array.from(Object.entries(searchParams)));
-
-  const insurancePlan = params.get('insurancePlan') || undefined;
-  const zipCode = params.get('zipCode') || undefined;
-  const billingCode = params.get('billingCode') || undefined;
-  const procedureName = params.get('procedureName') || undefined;
+  // Accessing search parameters from URLSearchParams
+  const insurancePlan = searchParams.get('insurancePlan') || undefined;
+  const zipCode = searchParams.get('zipCode') || undefined;
+  const billingCode = searchParams.get('billingCode') || undefined;
+  const procedureName = searchParams.get('procedureName') || undefined;
 
   if (!insurancePlan || !zipCode || !billingCode || !procedureName) {
     return (
