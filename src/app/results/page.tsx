@@ -8,10 +8,13 @@ export default async function ResultsPage({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) {
-  const insurancePlan = searchParams.insurancePlan;
-  const zipCode = searchParams.zipCode;
-  const billingCode = searchParams.billingCode;
-  const procedureName = searchParams.procedureName;
+  // Convert searchParams to URLSearchParams to resolve type compatibility
+  const params = new URLSearchParams(Array.from(Object.entries(searchParams)));
+
+  const insurancePlan = params.get('insurancePlan') || undefined;
+  const zipCode = params.get('zipCode') || undefined;
+  const billingCode = params.get('billingCode') || undefined;
+  const procedureName = params.get('procedureName') || undefined;
 
   if (!insurancePlan || !zipCode || !billingCode || !procedureName) {
     return (
